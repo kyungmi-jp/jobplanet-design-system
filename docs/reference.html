@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JDS 1.0 Reference</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+/* ============================================================
+   JDS 1.0 TOKENS — 이 :root 블록을 그대로 복사해서 쓴다
+   출처: Figma JDS 1.0 / Color 페이지 0:1, Typography 페이지 893:337
+   ============================================================ */
+:root{
+  /* Gray */
+  --jds-gray-30:#f9f9fb;  --jds-gray-50:#f3f3f4;  --jds-gray-100:#e5e6e9;
+  --jds-gray-200:#c5c7cc; --jds-gray-300:#a4a6ad; --jds-gray-400:#85878c;
+  --jds-gray-500:#686a6d; --jds-gray-600:#57595b; --jds-gray-700:#4b4c50;
+  --jds-gray-800:#323438; --jds-gray-900:#242628;
+  /* Green — 브랜드 */
+  --jds-green-30:#f2fbf7;  --jds-green-50:#e3f8ed;  --jds-green-100:#b8ebd0;
+  --jds-green-200:#87e0b6; --jds-green-300:#57d49b; --jds-green-400:#29c886;
+  --jds-green-500:#00C274; --jds-green-600:#00a866; --jds-green-700:#008552;
+  --jds-green-800:#006840; --jds-green-900:#024c30;
+  /* Purple — 프리미엄 */
+  --jds-purple-30:#f9f8fc;  --jds-purple-50:#f2f0f9;  --jds-purple-100:#d0cbec;
+  --jds-purple-200:#aaa1dd; --jds-purple-300:#8477cf; --jds-purple-400:#6856c3;
+  --jds-purple-500:#523cc3; --jds-purple-600:#4736b5; --jds-purple-700:#3b2ead;
+  --jds-purple-800:#3127a0; --jds-purple-900:#2b1b92;
+  /* Blue */
+  --jds-blue-30:#f6fbfe;  --jds-blue-50:#ecf6fe;  --jds-blue-100:#bbdefb;
+  --jds-blue-200:#90caf9; --jds-blue-300:#64b5f6; --jds-blue-400:#42a5f5;
+  --jds-blue-500:#2196f3; --jds-blue-600:#1e88e5; --jds-blue-700:#1976d2;
+  --jds-blue-800:#1565c0; --jds-blue-900:#0d47a1;
+  /* Red */
+  --jds-red-30:#fff7f7;  --jds-red-50:#fff0f2;  --jds-red-100:#ffcdcd;
+  --jds-red-200:#f6a2a2; --jds-red-300:#f38181; --jds-red-400:#ef5350;
+  --jds-red-500:#f44336; --jds-red-600:#e53935; --jds-red-700:#d32f2f;
+  --jds-red-800:#c62828; --jds-red-900:#b71c1c;
+  /* Orange */
+  --jds-orange-30:#fffaf5;  --jds-orange-50:#fff3e0;  --jds-orange-100:#ffe0b2;
+  --jds-orange-200:#ffcc80; --jds-orange-300:#ffb74d; --jds-orange-400:#ffa726;
+  --jds-orange-500:#ff9800; --jds-orange-600:#fb8c00; --jds-orange-700:#f57c00;
+  --jds-orange-800:#ef6c00; --jds-orange-900:#e65100;
+  /* Yellow */
+  --jds-yellow-30:#FDFCF5;  --jds-yellow-50:#FAF9EC;  --jds-yellow-100:#F6F3CB;
+  --jds-yellow-200:#F5E993; --jds-yellow-300:#FDE047; --jds-yellow-400:#FACC15;
+  --jds-yellow-500:#F0B500; --jds-yellow-600:#D79304; --jds-yellow-700:#AB6807;
+  --jds-yellow-800:#8D510E; --jds-yellow-900:#402812;
+  /* Teal */
+  --jds-teal-30:#f1fffd;  --jds-teal-50:#e0fffa;  --jds-teal-100:#b8f0e7;
+  --jds-teal-200:#87ded0; --jds-teal-300:#63d3c1; --jds-teal-400:#40c8b2;
+  --jds-teal-500:#1cbda3; --jds-teal-600:#15a78f; --jds-teal-700:#0e917b;
+  --jds-teal-800:#077a68; --jds-teal-900:#006454;
+  /* Base */
+  --jds-white:#ffffff;
+  --jds-dim:rgba(36,38,40,.5);
+  --jds-gradient-premium:linear-gradient(135deg,#9575cd,#5c6bc0);
+  --jds-gradient-star:linear-gradient(135deg,#FFD34E,#FFA726);
+  --jds-gradient-search:linear-gradient(90deg,#00C274 0%,#7EC6FF 70%,#AC9CFF 100%);
+  /* 시맨틱 별칭 */
+  --jds-text:var(--jds-gray-800);
+  --jds-text-strong:var(--jds-gray-900);
+  --jds-text-sub:var(--jds-gray-500);
+  --jds-text-disabled:var(--jds-gray-300);
+  --jds-border:var(--jds-gray-100);
+  --jds-divider:var(--jds-gray-50);
+  /* Spacing — 토큰 번호 = px × 25 */
+  --jds-space-50:2px; --jds-space-100:4px; --jds-space-150:6px; --jds-space-200:8px; --jds-space-250:10px; --jds-space-300:12px;
+  --jds-space-350:14px; --jds-space-400:16px; --jds-space-450:18px; --jds-space-500:20px; --jds-space-550:22px; --jds-space-600:24px;
+  --jds-space-650:26px; --jds-space-700:28px; --jds-space-750:30px; --jds-space-800:32px; --jds-space-900:36px; --jds-space-1000:40px;
+  --jds-space-1200:48px; --jds-space-1400:56px; --jds-space-1600:64px; --jds-space-1800:72px; --jds-space-2000:80px; --jds-space-2400:96px;
+  /* Font */
+  --jds-font:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+
+/* ============================================================
+   TYPOGRAPHY — class를 그대로 쓴다. size/lineHeight/weight 세트로만 쓸 것
+   ============================================================ */
+.jds-display-1{font:700 52px/72px var(--jds-font);letter-spacing:-.6px}
+.jds-display-2{font:700 40px/56px var(--jds-font);letter-spacing:-.6px}
+.jds-title-1{font:700 32px/44px var(--jds-font)}
+.jds-title-2{font:700 28px/40px var(--jds-font)}
+.jds-title-3{font:700 26px/36px var(--jds-font)}
+.jds-title-4{font:700 24px/34px var(--jds-font)}
+.jds-title-5{font:700 22px/30px var(--jds-font)}
+.jds-title-6{font:700 20px/28px var(--jds-font)}
+.jds-title-7{font:700 18px/26px var(--jds-font)}
+.jds-heading-1{font:600 16px/24px var(--jds-font)}
+.jds-heading-2{font:600 15px/24px var(--jds-font)}
+.jds-heading-3{font:600 14px/22px var(--jds-font)}
+.jds-heading-4{font:600 13px/20px var(--jds-font)}
+.jds-body-1{font:400 16px/24px var(--jds-font)}
+.jds-body-2{font:400 15px/24px var(--jds-font)}
+.jds-body-3{font:400 14px/22px var(--jds-font)}
+.jds-body-4{font:400 13px/20px var(--jds-font)}
+.jds-caption-1{font:600 12px/18px var(--jds-font)}
+.jds-caption-2{font:500 12px/18px var(--jds-font)}
+.jds-caption-3{font:600 11px/16px var(--jds-font)}
+.jds-caption-4{font:500 11px/16px var(--jds-font)}
+
+/* 한글 본문 기본 */
+body,p,li,td,th,dd,dt{word-break:keep-all}
+
+/* ============================================================
+   COMPONENT — Chip Selector (피그마 실측 검증됨, node 1856:238)
+   ============================================================ */
+.jds-chip{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--jds-font);font-size:13px;line-height:20px;
+  white-space:nowrap;cursor:pointer;box-sizing:border-box;
+}
+.jds-chip .jds-chip__icon{width:14px;height:14px;flex:none}
+.jds-chip--md .jds-chip__emoji{width:16px;height:16px;flex:none}
+.jds-chip--sm .jds-chip__emoji{width:14px;height:14px;flex:none}
+
+/* Fill */
+.jds-chip--fill{gap:4px;border-radius:999px;border:0}
+.jds-chip--fill.is-off{background:var(--jds-gray-50);color:var(--jds-gray-900);font-weight:400;padding:8px 14px}
+.jds-chip--fill.is-on {background:var(--jds-gray-900);color:var(--jds-white);font-weight:600;padding:7px 14px}
+/* Outlined */
+.jds-chip--outlined{gap:4px;border-radius:100px;background:var(--jds-white);border:1px solid;padding:8px 12px}
+.jds-chip--outlined.is-off{border-color:var(--jds-gray-100);color:var(--jds-gray-900);font-weight:400}
+.jds-chip--outlined.is-on {border-color:var(--jds-gray-900);color:var(--jds-gray-900);font-weight:600}
+/* Size */
+.jds-chip--sm{height:32px}
+.jds-chip--md{height:36px}
+/* 이모지는 Fill 에서만 그린다. Outlined 에는 이모지 슬롯이 없다 */
+
+/* ============================================================
+   COMPONENT — Chip Removable (피그마 실측 검증됨, node 2446:12026)
+   Size(32·36) × Theme(Primary·Secondary) = 4조합. Select 축 없음.
+   텍스트는 항상 Regular 400 — Selector 의 On(600) 과 다르다.
+   ============================================================ */
+.jds-chip-rm{
+  display:inline-flex;align-items:center;justify-content:center;gap:4px;
+  font-family:var(--jds-font);font-size:13px;line-height:20px;font-weight:400;
+  padding:8px 12px;border-radius:100px;
+  white-space:nowrap;cursor:pointer;box-sizing:border-box;
+}
+.jds-chip-rm .jds-chip-rm__icon{width:14px;height:14px;flex:none}
+.jds-chip-rm--secondary{background:var(--jds-white);border:1px solid var(--jds-gray-100);color:var(--jds-gray-900)}
+.jds-chip-rm--primary  {background:var(--jds-gray-900);border:0;color:var(--jds-white)}
+.jds-chip-rm--sm{height:32px}
+.jds-chip-rm--md{height:36px}
+
+/* ============================================================
+   COMPONENT — Checkbox (피그마 실측 검증됨, node 1898:3260 / 3260:1846)
+   ============================================================ */
+.jds-cb{display:inline-flex;align-items:center;justify-content:center;flex:none;box-sizing:border-box}
+.jds-cb svg{display:block}
+.jds-cb--md{width:20px;height:20px}
+.jds-cb--sm{width:16px;height:16px}
+/* Primary — 사각 박스 */
+.jds-cb--primary{border-radius:4px}
+.jds-cb--primary.is-default{background:transparent;border:1px solid var(--jds-gray-200)}
+.jds-cb--primary.is-selected{background:var(--jds-green-500);border:0}
+.jds-cb--primary.is-disabled{background:var(--jds-gray-100);border:0}
+/* Secondary — 아이콘만, 박스 없음 */
+.jds-cb--secondary{background:none;border:0;border-radius:0}
+
+/* Checkbox + 라벨 */
+.jds-cb-field{display:flex;gap:8px;align-items:flex-start;font-family:var(--jds-font);color:var(--jds-gray-900)}
+.jds-cb-field--right{flex-direction:row-reverse}
+/* border-box 다 — 피그마의 control h(24/22)는 상하 padding을 "포함한" 값이다.
+   content-box로 두면 24+2+2=28 이 되어 라벨과 세로 중앙이 어긋난다 */
+.jds-cb-field__control{display:flex;align-items:center;flex:none;box-sizing:border-box}
+.jds-cb-field--md .jds-cb-field__control{height:24px;padding:2px 0}
+.jds-cb-field--sm .jds-cb-field__control{height:22px;padding:3px 0}
+.jds-cb-field__label{flex:1;min-width:0;word-break:keep-all}
+.jds-cb-field--md .jds-cb-field__label{font:400 16px/24px var(--jds-font)}
+.jds-cb-field--sm .jds-cb-field__label{font:400 14px/22px var(--jds-font)}
+
+/* ============================================================
+   COMPONENT — PC Header (피그마 실측 검증됨, node 158:2190)
+   ============================================================ */
+.jds-hdr{background:var(--jds-white);border-bottom:1px solid var(--jds-gray-100)}
+.jds-hdr__inner{max-width:1200px;margin:0 auto;height:56px;
+  display:flex;align-items:center;justify-content:space-between}
+.jds-hdr__nav{display:flex;gap:34px;align-items:flex-end;height:100%}
+.jds-hdr__logo{width:106px;height:38px;display:flex;align-items:flex-end}
+.jds-hdr__logo svg{width:106px;height:25px;display:block}
+.jds-hdr__item{height:38px;display:flex;flex-direction:column;gap:12px;
+  font:600 15px/24px var(--jds-font);color:var(--jds-gray-800);text-align:center;
+  background:none;border:0;padding:0;cursor:pointer}
+.jds-hdr__item.is-active::after{content:"";display:block;height:2px;width:100%;background:var(--jds-green-500)}
+.jds-hdr__actions{display:flex;gap:24px;align-items:center;padding:10px 0}
+.jds-hdr__search{width:188px;height:40px;background:var(--jds-gray-50);border-radius:999px;
+  padding:11px 16px;display:flex;align-items:center;gap:4px;border:0;
+  font:400 14px/22px var(--jds-font);color:var(--jds-gray-300)}
+.jds-hdr__search--wide{width:620px}
+.jds-hdr__search svg{width:14px;height:14px;flex:none}
+.jds-hdr__btn{height:32px;max-height:32px;min-width:32px;padding:6px 10px;border-radius:8px;
+  background:var(--jds-white);border:0;display:inline-flex;align-items:center;justify-content:center;gap:4px;
+  font:600 13px/20px var(--jds-font);color:var(--jds-gray-500);white-space:nowrap;cursor:pointer}
+.jds-hdr__divider{width:1px;height:13px;background:var(--jds-gray-100);flex:none}
+.jds-hdr__touch{padding:8px;display:inline-flex;align-items:center;background:none;border:0;cursor:pointer}
+.jds-hdr__touch svg{width:16px;height:16px;display:block}
+.jds-hdr__profile{width:32px;height:32px;padding:8px;border-radius:6px;
+  background:var(--jds-gray-30);border:1px solid var(--jds-gray-100);
+  display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box}
+.jds-hdr__profile svg{width:14px;height:14px;display:block}
+
+/* ============================================================
+   COMPONENT — Mobile Header (피그마 실측 검증됨, node 21:23114 / 21:23096)
+   폭 393 · 높이 56 · 세로 padding 8 · 터치영역 40(아이콘24+8)
+   좌우 padding 이 셋 다 다르다: Main bar 20 / Nav Main 16·10 / Sub 10
+   ============================================================ */
+.jds-mheader{width:393px;height:56px;background:var(--jds-white);
+  display:flex;align-items:center;padding:8px 0;box-sizing:border-box;
+  font-family:var(--jds-font);color:var(--jds-gray-900)}
+/* 터치 영역 — 아이콘 24 + padding 8 = 40 */
+.jds-mheader__touch{display:flex;align-items:center;justify-content:center;
+  padding:8px;flex:none;box-sizing:border-box}
+.jds-mheader__touch svg{width:24px;height:24px;display:block}
+/* Sub/Info 만 아이콘 20px, 터치영역은 40 고정 */
+.jds-mheader__touch--info{width:40px;height:40px}
+.jds-mheader__touch--info svg{width:20px;height:20px}
+.jds-mheader__icons{display:flex;align-items:center;flex:none}
+
+/* Main bar — 로고형 */
+.jds-mheader--mainbar{padding:8px 20px;gap:16px;justify-content:center}
+.jds-mheader__logo{width:106px;height:25px;flex:none;display:flex;align-items:center}
+.jds-mheader__logo svg{width:106px;height:auto;display:block}
+.jds-mheader--mainbar .jds-mheader__right{flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-end}
+
+/* Nav bar / Main — 큰 타이틀 + 아이콘 3개 */
+.jds-mheader--navmain{padding:8px 10px 8px 16px;justify-content:space-between}
+.jds-mheader__title-lg{flex:1;min-width:0;font:700 22px/30px var(--jds-font);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Nav bar / Sub 3종 — 가운데 타이틀 */
+.jds-mheader--sub{padding:8px 10px;gap:8px}
+.jds-mheader__title{flex:1;min-width:0;font:700 18px/26px var(--jds-font);text-align:center;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* Sub/Icon2 의 균형추 — 오른쪽 아이콘 2개(80)만큼 왼쪽을 채워 타이틀을 정중앙에 둔다 */
+.jds-mheader__ballast{padding-right:40px;flex:none;display:flex;align-items:center}
+
+/* ============================================================
+   COMPONENT — Button (피그마 실측 검증됨, node 330:67443)
+   ============================================================ */
+.jds-btn{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;
+  border:0;background:none;cursor:pointer;white-space:nowrap;font-family:var(--jds-font);font-weight:600}
+.jds-btn svg{display:block;flex:none}
+/* size */
+.jds-btn--xs{height:32px;min-width:32px;padding:6px 10px;gap:4px;border-radius:8px;font-size:13px;line-height:20px}
+.jds-btn--sm{height:40px;min-width:40px;padding:9px 12px;gap:4px;border-radius:10px;font-size:14px;line-height:22px}
+.jds-btn--md{height:48px;min-width:48px;padding:12px 14px;gap:6px;border-radius:10px;font-size:16px;line-height:24px}
+.jds-btn--lg{height:52px;min-width:52px;padding:14px 16px;gap:6px;border-radius:10px;font-size:16px;line-height:24px}
+/* Pill — Quaternary 전용. radius = 높이 ÷ 2 */
+.jds-btn--pill.jds-btn--xs{border-radius:16px}
+.jds-btn--pill.jds-btn--sm{border-radius:20px;padding-top:10px;padding-bottom:10px}
+.jds-btn--pill.jds-btn--md{border-radius:24px}
+.jds-btn--pill.jds-btn--lg{border-radius:26px}
+/* theme */
+.jds-btn--primary{background:var(--jds-green-500);color:var(--jds-white)}
+.jds-btn--primary:hover,.jds-btn--primary.is-hover{background:var(--jds-green-600)}
+.jds-btn--primary:disabled,.jds-btn--primary.is-disabled{background:var(--jds-gray-200);color:var(--jds-white)}
+.jds-btn--secondary{background:var(--jds-gray-50);color:var(--jds-gray-600)}
+.jds-btn--secondary:hover,.jds-btn--secondary.is-hover{background:var(--jds-gray-100)}
+.jds-btn--secondary:disabled,.jds-btn--secondary.is-disabled{background:var(--jds-gray-100);color:var(--jds-gray-300)}
+.jds-btn--tertiary{background:var(--jds-white);border:1px solid var(--jds-gray-100);color:var(--jds-green-500)}
+.jds-btn--tertiary:hover,.jds-btn--tertiary.is-hover{background:var(--jds-gray-30);color:var(--jds-green-600)}
+.jds-btn--tertiary:disabled,.jds-btn--tertiary.is-disabled{background:var(--jds-white);color:var(--jds-gray-200)}
+.jds-btn--quaternary{background:var(--jds-white);border:1px solid var(--jds-gray-100);color:var(--jds-gray-600)}
+.jds-btn--quaternary:hover,.jds-btn--quaternary.is-hover{background:var(--jds-gray-30)}
+.jds-btn--quaternary:disabled,.jds-btn--quaternary.is-disabled{background:var(--jds-white);color:var(--jds-gray-200)}
+.jds-btn--error{background:var(--jds-red-500);color:var(--jds-white)}
+.jds-btn--error:hover,.jds-btn--error.is-hover{background:var(--jds-red-600)}
+.jds-btn--error:disabled,.jds-btn--error.is-disabled{background:var(--jds-gray-200);color:var(--jds-white)}
+/* loading — 라벨 없이 정사각형 */
+.jds-btn.is-loading{padding-left:0;padding-right:0}
+.jds-btn--xs.is-loading{width:32px}
+.jds-btn--sm.is-loading{width:40px}
+.jds-btn--md.is-loading{width:48px}
+.jds-btn--lg.is-loading{width:52px}
+
+/* 메인 CTA — 규칙 R1. 화면 하단 주요 행동 버튼은 항상 이것 */
+.jds-cta{height:52px;min-width:52px;padding:14px 16px;gap:6px;border-radius:10px;
+  background:var(--jds-green-500);color:var(--jds-white);
+  font:600 16px/24px var(--jds-font);
+  display:inline-flex;align-items:center;justify-content:center;
+  box-sizing:border-box;border:0;cursor:pointer;white-space:nowrap}
+.jds-cta:hover{background:var(--jds-green-600)}
+.jds-cta:disabled{background:var(--jds-gray-200)}
+/* 하단 CTA — 화면 폭 꽉, 좌우 여백 16 */
+.jds-cta--block{display:flex;width:100%}
+.jds-cta-slot{padding:0 16px}
+
+/* ============================================================
+   COMPONENT — ButtonText (피그마 실측 검증됨, node 1016:2962)
+   배경·보더·padding·밑줄 없음. color 는 "놓이는 배경"을 뜻한다.
+   ============================================================ */
+.jds-btntext{display:inline-flex;align-items:center;justify-content:center;overflow:hidden;
+  background:none;border:0;padding:0;cursor:pointer;white-space:nowrap;font-family:var(--jds-font)}
+.jds-btntext svg{display:block;flex:none}
+.jds-btntext--xs{font-size:13px;line-height:20px;gap:4px}
+.jds-btntext--sm{font-size:14px;line-height:22px;gap:4px}
+.jds-btntext--md{font-size:16px;line-height:24px;gap:6px}
+.jds-btntext--xs svg{width:14px;height:14px}
+.jds-btntext--sm svg{width:16px;height:16px}
+.jds-btntext--md svg{width:20px;height:20px}
+.jds-btntext--dark-bg{color:var(--jds-gray-300)}   /* 어두운 배경 위 */
+.jds-btntext--light-bg{color:var(--jds-gray-400)}  /* 밝은 배경 위 */
+.jds-btntext--primary{color:var(--jds-green-500)}
+.jds-btntext.is-regular{font-weight:400}
+.jds-btntext.is-bold{font-weight:600}   /* SemiBold. 700 아님 */
+
+/* ============================================================
+   GRID — 피그마 실측 검증됨, 섹션 889:7665
+   Desktop: Container 1200 / Margin 8 / Contents 1184 / 12col × 84 / gutter 16
+   Mobile : 393 / Margin 16 / Contents 361 / 4col × 78.25 / gutter 16
+   컬럼 폭은 고정하지 말고 1fr 로 나눈다 (모바일 78.25 때문)
+   ============================================================ */
+.jds-container{max-width:1200px;margin:0 auto;padding:0 8px}
+.jds-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+@media (max-width:600px){
+  .jds-container{max-width:393px;padding:0 16px}
+  .jds-grid{grid-template-columns:repeat(4,1fr)}
+}
+
+/* ============================================================
+   COMPONENT — Tab (피그마 실측 검증됨, node 895:925)
+   개수(2~7) × Select(1~n) = 27조합. 탭 줄 52 + Divider 1 = 53.
+   인디케이터는 아이템 "안쪽"에 그린다 — border-bottom 으로 만들면 높이가 54가 된다.
+   ============================================================ */
+/* inline-flex 다 — 피그마 컴포넌트가 hug(폭 66n−8) 이라 내용만큼만 차지한다.
+   화면에서 디바이더를 컨테이너 끝까지 늘리고 싶으면 바깥에서 폭을 주거나 디바이더를 따로 놓는다 */
+.jds-tab{display:inline-flex;flex-direction:column;align-items:flex-start}
+.jds-tab__row{display:flex;gap:8px;align-items:center}
+.jds-tab__item{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  padding:14px 8px;background:none;border:0;cursor:pointer;
+  font:600 16px/24px var(--jds-font);white-space:nowrap;
+  color:var(--jds-gray-200);          /* 미선택 — Gray300 아님 */
+}
+.jds-tab__item.is-on{color:var(--jds-gray-800)}   /* 선택 — Gray900 아님 */
+.jds-tab__item.is-on::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:var(--jds-gray-800);      /* Green 아님 */
+}
+/* 아래 디바이더는 .jds-divider.jds-divider--g100 을 그대로 쓴다 */
+
+/* ============================================================
+   COMPONENT — Divider (피그마 실측 검증됨, node 469:8873)
+   Type(Thin 1px · Thick 8px) × Color(Gray50 · Gray100) = 4조합.
+   보더가 아니라 "높이를 가진 배경 블록"이다. 폭은 부모를 채운다.
+   ============================================================ */
+.jds-divider{width:100%;height:1px;background:var(--jds-gray-50);border:0;margin:0}
+.jds-divider--thick{height:8px}
+.jds-divider--g100{background:var(--jds-gray-100)}
+
+/* ---------- 이 아래는 이 문서를 보기 위한 스타일. 복사하지 말 것 ---------- */
+body{margin:0;padding:40px;background:#fff;color:var(--jds-text);font-family:var(--jds-font)}
+h2{font:700 24px/34px var(--jds-font);margin:56px 0 16px;color:var(--jds-gray-900)}
+h2:first-of-type{margin-top:0}
+.doc-note{font:400 13px/20px var(--jds-font);color:var(--jds-gray-500);margin:0 0 20px}
+.swatch-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px}
+.swatch{width:88px}
+.swatch i{display:block;height:56px;border-radius:6px;border:1px solid var(--jds-gray-100)}
+.swatch b{display:block;font:600 11px/16px var(--jds-font);margin-top:6px;color:var(--jds-gray-800)}
+.swatch span{display:block;font:400 11px/16px var(--jds-font);color:var(--jds-gray-400)}
+.type-row{display:flex;align-items:baseline;gap:24px;padding:10px 0;border-bottom:1px solid var(--jds-divider)}
+.type-row code{font:600 11px/16px ui-monospace,monospace;color:var(--jds-gray-400);width:96px;flex:none}
+.type-row em{font:400 11px/16px var(--jds-font);color:var(--jds-gray-300);font-style:normal;margin-left:auto;flex:none}
+.chip-grid{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+</style>
+</head>
+<body>
+
+<h2>Color</h2>
+<p class="doc-note">Gray800 = 기본 텍스트 · Gray100 = 보더 · Gray50 = 디바이더 · Green500 = 메인 브랜드 · Purple500 = 프리미엄</p>
+<div id="colors"></div>
+
+<h2>Typography</h2>
+<p class="doc-note">Heading N과 Body N은 size·line-height가 같고 weight만 다르다.</p>
+<div id="types"></div>
+
+<h2>Chip Selector</h2>
+<p class="doc-note">피그마 실측 검증됨. Fill·On만 세로 padding 7px (나머지 8px).</p>
+<div class="chip-grid">
+  <div>
+    <span class="jds-chip jds-chip--fill jds-chip--md is-on">🔥 최신순 <svg class="jds-chip__icon" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <span class="jds-chip jds-chip--fill jds-chip--md is-off">🔥 최신순 <svg class="jds-chip__icon" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <em style="font:400 11px/16px var(--jds-font);color:var(--jds-gray-400)">Fill · Medium(36) · On / Off</em>
+  </div>
+  <div>
+    <span class="jds-chip jds-chip--fill jds-chip--sm is-on">🔥 최신순</span>
+    <span class="jds-chip jds-chip--fill jds-chip--sm is-off">🔥 최신순</span>
+    <em style="font:400 11px/16px var(--jds-font);color:var(--jds-gray-400)">Fill · Small(32) · On / Off</em>
+  </div>
+  <div>
+    <span class="jds-chip jds-chip--outlined jds-chip--md is-on">전체</span>
+    <span class="jds-chip jds-chip--outlined jds-chip--md is-off">전체</span>
+    <em style="font:400 11px/16px var(--jds-font);color:var(--jds-gray-400)">Outlined · Medium(36) · On / Off</em>
+  </div>
+  <div>
+    <span class="jds-chip jds-chip--outlined jds-chip--sm is-on">전체</span>
+    <span class="jds-chip jds-chip--outlined jds-chip--sm is-off">전체</span>
+    <em style="font:400 11px/16px var(--jds-font);color:var(--jds-gray-400)">Outlined · Small(32) · On / Off</em>
+  </div>
+</div>
+
+<h2>아직 검증 안 된 컴포넌트</h2>
+<p class="doc-note">
+Button (Rounded/Pill) · ButtonText · Icon Button · Text Field · Tag · Tab · Card/List · Modal · Bottomsheet · Chip Removable · Pagination.<br>
+피그마에서 실측하기 전에는 여기에 넣지 않는다. 추측한 컴포넌트를 넣으면 완성도가 떨어지는 원인이 그대로 남는다.
+</p>
+
+<script>
+const PALETTES={Gray:['30','50','100','200','300','400','500','600','700','800','900'],
+Green:0,Purple:0,Blue:0,Red:0,Orange:0,Yellow:0,Teal:0};
+const STEPS=['30','50','100','200','300','400','500','600','700','800','900'];
+const cs=getComputedStyle(document.documentElement);
+document.getElementById('colors').innerHTML=Object.keys(PALETTES).map(name=>{
+  const key=name.toLowerCase();
+  return '<div class="swatch-row">'+STEPS.map(st=>{
+    const v=cs.getPropertyValue('--jds-'+key+'-'+st).trim();
+    return `<div class="swatch"><i style="background:${v}"></i><b>${name}${st}</b><span>${v}</span></div>`;
+  }).join('')+'</div>';
+}).join('');
+
+const TYPES=[['Display 1','display-1',52,72,700],['Display 2','display-2',40,56,700],
+['Title 1','title-1',32,44,700],['Title 2','title-2',28,40,700],['Title 3','title-3',26,36,700],
+['Title 4','title-4',24,34,700],['Title 5','title-5',22,30,700],['Title 6','title-6',20,28,700],
+['Title 7','title-7',18,26,700],['Heading 1','heading-1',16,24,600],['Heading 2','heading-2',15,24,600],
+['Heading 3','heading-3',14,22,600],['Heading 4','heading-4',13,20,600],['Body 1','body-1',16,24,400],
+['Body 2','body-2',15,24,400],['Body 3','body-3',14,22,400],['Body 4','body-4',13,20,400],
+['Caption 1','caption-1',12,18,600],['Caption 2','caption-2',12,18,500],
+['Caption 3','caption-3',11,16,600],['Caption 4','caption-4',11,16,500]];
+document.getElementById('types').innerHTML=TYPES.map(([n,c,s,l,w])=>
+`<div class="type-row"><code>.jds-${c}</code><span class="jds-${c}">다람쥐 헌 쳇바퀴에 타고파</span><em>${s} / ${l} / ${w}</em></div>`
+).join('');
+</script>
+</body>
+</html>
